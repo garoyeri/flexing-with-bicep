@@ -101,13 +101,75 @@ func listLocationShortNames() object => {
 
 @export()
 @description('Format a numeric index into a three digit, zero-filled string.')
-func formatIndex(index int) string =>
-  format('0,D3', index)
+func formatIndex(index int) string => format('0,D3', index)
 
 @export()
 @description('Derive a short name for an Azure location (region). For example: \'East US\' => \'EUS\'')
-func nameLocation(location string) string =>
-  listLocationShortNames()[location]
+func nameLocation(location string) string => listLocationShortNames()[location]
+
+@export()
+@description('List the available network delegations.')
+var networkDelegations = {
+  Dell_Storage_fileSystems: 'Dell.Storage/fileSystems'
+  GitHub_Network_networkSettings: 'GitHub.Network/networkSettings'
+  Informatica_DataManagement_organizations: 'Informatica.DataManagement/organizations'
+  Microsoft_ApiManagement_service: 'Microsoft.ApiManagement/service'
+  Microsoft_Apollo_npu: 'Microsoft.Apollo/npu'
+  Microsoft_App_environments: 'Microsoft.App/environments'
+  Microsoft_AVS_PrivateClouds: 'Microsoft.AVS/PrivateClouds'
+  Microsoft_AzureCommunicationsGateway_networkSettings: 'Microsoft.AzureCommunicationsGateway/networkSettings'
+  Microsoft_AzureCosmosDB_clusters: 'Microsoft.AzureCosmosDB/clusters'
+  Microsoft_BareMetal_AzureHostedService: 'Microsoft.BareMetal/AzureHostedService'
+  Microsoft_BareMetal_AzureVMware: 'Microsoft.BareMetal/AzureVMware'
+  Microsoft_BareMetal_CrayServers: 'Microsoft.BareMetal/CrayServers'
+  Microsoft_Batch_batchAccounts: 'Microsoft.Batch/batchAccounts'
+  Microsoft_CloudTest_hostedpools: 'Microsoft.CloudTest/hostedpools'
+  Microsoft_CloudTest_images: 'Microsoft.CloudTest/images'
+  Microsoft_CloudTest_pools: 'Microsoft.CloudTest/pools'
+  Microsoft_ContainerInstance_containerGroups: 'Microsoft.ContainerInstance/containerGroups'
+  Microsoft_ContainerService_managedClusters: 'Microsoft.ContainerService/managedClusters'
+  Microsoft_Databricks_workspaces: 'Microsoft.Databricks/workspaces'
+  Microsoft_DBforMySQL_flexibleServers: 'Microsoft.DBforMySQL/flexibleServers'
+  Microsoft_DBforMySQL_servers: 'Microsoft.DBforMySQL/servers'
+  Microsoft_DBforMySQL_serversv2: 'Microsoft.DBforMySQL/serversv2'
+  Microsoft_DBforPostgreSQL_flexibleServers: 'Microsoft.DBforPostgreSQL/flexibleServers'
+  Microsoft_DBforPostgreSQL_serversv2: 'Microsoft.DBforPostgreSQL/serversv2'
+  Microsoft_DBforPostgreSQL_singleServers: 'Microsoft.DBforPostgreSQL/singleServers'
+  Microsoft_DelegatedNetwork_controller: 'Microsoft.DelegatedNetwork/controller'
+  Microsoft_DevCenter_networkConnection: 'Microsoft.DevCenter/networkConnection'
+  Microsoft_DevOpsInfrastructure_pools: 'Microsoft.DevOpsInfrastructure/pools'
+  Microsoft_DocumentDB_cassandraClusters: 'Microsoft.DocumentDB/cassandraClusters'
+  Microsoft_Fidalgo_networkSettings: 'Microsoft.Fidalgo/networkSettings'
+  Microsoft_HardwareSecurityModules_dedicatedHSMs: 'Microsoft.HardwareSecurityModules/dedicatedHSMs'
+  Microsoft_Kusto_clusters: 'Microsoft.Kusto/clusters'
+  Microsoft_LabServices_labplans: 'Microsoft.LabServices/labplans'
+  Microsoft_Logic_integrationServiceEnvironments: 'Microsoft.Logic/integrationServiceEnvironments'
+  Microsoft_MachineLearningServices_workspaceComputes: 'Microsoft.MachineLearningServices/workspaceComputes'
+  Microsoft_MachineLearningServices_workspaces: 'Microsoft.MachineLearningServices/workspaces'
+  Microsoft_Netapp_scaleVolumes: 'Microsoft.Netapp/scaleVolumes'
+  Microsoft_Netapp_volumes: 'Microsoft.Netapp/volumes'
+  Microsoft_Network_dnsResolvers: 'Microsoft.Network/dnsResolvers'
+  Microsoft_Network_networkWatchers: 'Microsoft.Network/networkWatchers'
+  Microsoft_Orbital_orbitalGateways: 'Microsoft.Orbital/orbitalGateways'
+  Microsoft_PowerAutomate_hostedRpa: 'Microsoft.PowerAutomate/hostedRpa'
+  Microsoft_PowerPlatform_enterprisePolicies: 'Microsoft.PowerPlatform/enterprisePolicies'
+  Microsoft_PowerPlatform_vnetaccesslinks: 'Microsoft.PowerPlatform/vnetaccesslinks'
+  Microsoft_ServiceFabricMesh_networks: 'Microsoft.ServiceFabricMesh/networks'
+  Microsoft_ServiceNetworking_trafficControllers: 'Microsoft.ServiceNetworking/trafficControllers'
+  Microsoft_Singularity_accounts_networks: 'Microsoft.Singularity/accounts/networks'
+  Microsoft_Singularity_accounts_npu: 'Microsoft.Singularity/accounts/npu'
+  Microsoft_Sql_managedInstances: 'Microsoft.Sql/managedInstances'
+  Microsoft_StoragePool_diskPools: 'Microsoft.StoragePool/diskPools'
+  Microsoft_StreamAnalytics_streamingJobs: 'Microsoft.StreamAnalytics/streamingJobs'
+  Microsoft_Synapse_workspaces: 'Microsoft.Synapse/workspaces'
+  Microsoft_Web_hostingEnvironments: 'Microsoft.Web/hostingEnvironments'
+  Microsoft_Web_serverFarms: 'Microsoft.Web/serverFarms'
+  NGINX_NGINXPLUS_nginxDeployments: 'NGINX.NGINXPLUS/nginxDeployments'
+  Oracle_Database_networkAttachments: 'Oracle.Database/networkAttachments'
+  PaloAltoNetworks_Cloudngfw_firewalls: 'PaloAltoNetworks.Cloudngfw/firewalls'
+  PureStorage_Block_storagePools: 'PureStorage.Block/storagePools'
+  Qumulo_Storage_fileSystems: 'Qumulo.Storage/fileSystems'
+}
 
 @export()
 @description('Derive a name for a Virtual Network. For example: vnet-<subscription purpose>-<region>-<000>')
@@ -119,5 +181,7 @@ func nameNetworkVnet(location string, purpose string, index int) string =>
 func nameNetworkSubnet(location string, purpose string, index int) string =>
   'snet-${toLower(purpose)}-${nameLocation(location)}-${formatIndex(index)}'
 
+@export()
+@description('Derive a name for a Network Security Group. For example: nsg-<policy name>-<000>')
 func nameNetworkSecurityGroup(policyName string, index int) string =>
   'nsg-${replace(policyName, ' ', '_')}-${formatIndex(index)}'

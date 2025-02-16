@@ -46,16 +46,28 @@ module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
         addressPrefixes: [
           '10.0.0.96/27'
         ]
-        // delegation: 
+        delegation: n.networkDelegations.Microsoft_Web_serverFarms
       }
 
-      // PostgreSQL: delegated
+      // PostgreSQL Flexible Servers: delegated
       {
         name: n.nameNetworkSubnet(location, 'PGSQL', 1)
         addressPrefixes: [
           '10.0.0.128/27'
         ]
+        delegation: n.networkDelegations.Microsoft_DBforPostgreSQL_flexibleServers
       }
+
+      // Application Gateway
+      {
+        name: n.nameNetworkSubnet(location, 'AGW', 1)
+        addressPrefixes: [
+          '10.0.0.160/27'
+        ]
+        // doesn't use explicit delegation, but once you deploy to it, it will reserve
+      }
+
+      // 10.0.0.192/26	is available as slack
     ]
   }
 }
