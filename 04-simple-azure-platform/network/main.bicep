@@ -46,7 +46,7 @@ module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
         addressPrefixes: [
           '10.0.0.96/27'
         ]
-        delegation: 
+        // delegation: 
       }
 
       // PostgreSQL: delegated
