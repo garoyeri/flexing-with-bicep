@@ -24,6 +24,7 @@ jobs:
           name: Network-${{ github.run_number }}
           location: ${{ env.location }}
           scope: resourceGroup
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
 
@@ -34,5 +35,6 @@ jobs:
           name: Network-${{ github.run_number }}
           location: ${{ env.location }}
           scope: resourceGroup
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
