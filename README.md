@@ -11,6 +11,7 @@ To run the GitHub Actions scripts, you must first create a secret and a variable
    {"clientSecret":  "******","subscriptionId":  "******","tenantId":  "******","clientId":"******"}
    ```
 
-2. Create a variable named `AZURE_RESOURCE_GROUP`
-3. Try running the `Validate Azure Configuration` workflow to see if it is working correctly.
+1. Create a variable named `AZURE_RESOURCE_GROUP` with your resource group name.
+1. Create a variable named `AZURE_LOCATION` with your location (region) name.
+1. Try running the `Validate Azure Configuration` workflow to see if it is working correctly.
    - NOTE: if you are using OIDC authentication with GitHub and Azure, then refer to the documentation in [Azure Login Action](https://github.com/marketplace/actions/azure-login) to correctly configure the credentials.
