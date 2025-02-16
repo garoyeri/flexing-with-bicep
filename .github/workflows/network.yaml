@@ -22,7 +22,6 @@ jobs:
           type: deployment
           operation: validate
           name: Network-${{ github.run_number }}
-          location: ${{ env.location }}
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
@@ -33,7 +32,6 @@ jobs:
           type: deployment
           operation: whatIf
           name: Network-${{ github.run_number }}
-          location: ${{ env.location }}
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
