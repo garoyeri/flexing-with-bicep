@@ -1,0 +1,38 @@
+name: Deploy Network Space
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    env:
+      rg: ${{ vars.AZURE_RESOURCE_GROUP }}
+      location: ${{ vars.AZURE_LOCATION }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/bicep-deploy@v2
+        with:
+          type: deployment
+          operation: validate
+          name: Network-${{ github.run_number }}
+          location: ${{ env.location }}
+          scope: resourceGroup
+          resource-group-name: ${{ env.rg }}
+          template-file: ./04-simple-azure-platform/network/main.bicep
+
+      - uses: azure/bicep-deploy@v2
+        with:
+          type: deployment
+          operation: whatIf
+          name: Network-${{ github.run_number }}
+          location: ${{ env.location }}
+          scope: resourceGroup
+          resource-group-name: ${{ env.rg }}
+          template-file: ./04-simple-azure-platform/network/main.bicep
