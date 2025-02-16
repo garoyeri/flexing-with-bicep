@@ -179,12 +179,12 @@ var networkDelegations = {
 @export()
 @description('Derive a name for a Virtual Network. For example: vnet-<subscription purpose>-<region>-<000>')
 func nameNetworkVnet(location string, purpose string, index Index) string =>
-  'vnet-${toLower(purpose)}-${nameLocation(location)}-${formatIndex(index)}'
+  'vnet-${toLower(purpose)}-${toLower(nameLocation(location))}-${formatIndex(index)}'
 
 @export()
 @description('Derive a name for a Subnet. For example: snet-<subscription purpose>-<region>-<000>')
 func nameNetworkSubnet(location string, purpose string, index Index) string =>
-  'snet-${toLower(purpose)}-${nameLocation(location)}-${formatIndex(index)}'
+  'snet-${toLower(purpose)}-${toLower(nameLocation(location))}-${formatIndex(index)}'
 
 @export()
 @description('Derive a name for a Network Security Group. For example: nsg-<policy name>-<000>')
