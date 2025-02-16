@@ -1,0 +1,25 @@
+name: Deploy Network
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    env:
+      rg: ${{ vars.AZURE_RESOURCE_GROUP }}
+
+    steps:
+      - uses: actions/checkout@4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          tenantId: ${{ secrets.AZURE_TENANT_ID }}
+          clientSecret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az resource show -n ${{ env.rg }}
