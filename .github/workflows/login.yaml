@@ -1,4 +1,4 @@
-name: Deploy Network
+name: Validate Azure Configuration
 
 on:
   workflow_dispatch:
