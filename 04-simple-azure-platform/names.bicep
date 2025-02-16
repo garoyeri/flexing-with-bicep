@@ -100,8 +100,13 @@ func listLocationShortNames() object => {
 }
 
 @export()
+@minValue(0)
+@maxValue(999)
+type Index = int
+
+@export()
 @description('Format a numeric index into a three digit, zero-filled string.')
-func formatIndex(index int) string => format('0,D3', index)
+func formatIndex(index Index) string => padLeft(index, 3, '0')
 
 @export()
 @description('Derive a short name for an Azure location (region). For example: \'East US\' => \'EUS\'')
@@ -173,15 +178,15 @@ var networkDelegations = {
 
 @export()
 @description('Derive a name for a Virtual Network. For example: vnet-<subscription purpose>-<region>-<000>')
-func nameNetworkVnet(location string, purpose string, index int) string =>
+func nameNetworkVnet(location string, purpose string, index Index) string =>
   'vnet-${toLower(purpose)}-${nameLocation(location)}-${formatIndex(index)}'
 
 @export()
 @description('Derive a name for a Subnet. For example: snet-<subscription purpose>-<region>-<000>')
-func nameNetworkSubnet(location string, purpose string, index int) string =>
+func nameNetworkSubnet(location string, purpose string, index Index) string =>
   'snet-${toLower(purpose)}-${nameLocation(location)}-${formatIndex(index)}'
 
 @export()
 @description('Derive a name for a Network Security Group. For example: nsg-<policy name>-<000>')
-func nameNetworkSecurityGroup(policyName string, index int) string =>
+func nameNetworkSecurityGroup(policyName string, index Index) string =>
   'nsg-${replace(policyName, ' ', '_')}-${formatIndex(index)}'
