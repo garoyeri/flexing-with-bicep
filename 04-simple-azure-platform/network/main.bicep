@@ -7,9 +7,21 @@ param location string = resourceGroup().location
 
 param spaceName string = 'dev'
 
+module log 'br/public:avm/res/operational-insights/workspace:0.11.0' = {
+  name: 'log'
+  params: {
+    name: n.nameLogWorkspace(location, spaceName, 1)
+    location: location
+  }
+}
+
 /*
   Create a virtual network with all the usual subnets we need:
-
+  - PrivateLink
+  - Virtual Machines
+  - App Services
+  - PostgreSQL
+  - Application Gateway
 */
 module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
   name: 'vnet'
@@ -69,5 +81,13 @@ module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
 
       // 10.0.0.192/26	is available as slack
     ]
+    diagnosticSettings: [
+      {
+        workspaceResourceId: log.outputs.logAnalyticsWorkspaceId
+      }
+    ]
   }
 }
+
+output logAnalyticsWorkspaceId string = log.outputs.logAnalyticsWorkspaceId
+output networkId string = vnet.outputs.resourceId

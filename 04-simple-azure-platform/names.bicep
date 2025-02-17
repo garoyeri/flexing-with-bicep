@@ -190,3 +190,34 @@ func nameNetworkSubnet(location string, purpose string, index Index) string =>
 @description('Derive a name for a Network Security Group. For example: nsg-<policy name>-<000>')
 func nameNetworkSecurityGroup(policyName string, index Index) string =>
   'nsg-${replace(policyName, ' ', '_')}-${formatIndex(index)}'
+
+
+@export()
+@description('Derive a name for an App Service Plan. For example: asp-<workload>-<space>-<region>-<000>')
+func nameWebServerFarm(location string, spaceName string, workload string, index Index) string =>
+  'asp-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for an Web Application. For example: app-<workload>-<space>-<region>-<000>')
+func nameWebApplication(location string, spaceName string, workload string, index Index) string =>
+  'app-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for a Function Application. For example: fun-<workload>-<space>-<region>-<000>')
+func nameFunctionApplication(location string, spaceName string, workload string, index Index) string =>
+  'fun-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for a log analytics workspace')
+func nameLogWorkspace(location string, spaceName string, index Index) string =>
+  'log-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for a SQL Server')
+func nameSqlServer(location string, spaceName string, workload string, index Index) string =>
+  'sqlsvr-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for a SQL Server Elastic Pool')
+func nameSqlElasticPool(location string, spaceName string, workload string, index Index) string =>
+  'sqlep-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
