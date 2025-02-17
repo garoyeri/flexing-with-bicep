@@ -221,3 +221,8 @@ func nameSqlServer(location string, spaceName string, workload string, index Ind
 @description('Derive a name for a SQL Server Elastic Pool')
 func nameSqlElasticPool(location string, spaceName string, workload string, index Index) string =>
   'sqlep-${workload}-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'
+
+@export()
+@description('Derive a name for a Azure Monitor Private Link Scope. Example: pls-<spaceName>-<region>-<000>')
+func nameInsightsPrivateLinkScope(location string, spaceName string, index Index) string =>
+  'pls-${spaceName}-${toLower(nameLocation(location))}-${formatIndex(index)}'

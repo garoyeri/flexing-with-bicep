@@ -89,5 +89,28 @@ module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
   }
 }
 
+module privateLinkDnsZones 'br/public:avm/ptn/network/private-link-private-dns-zones:0.3.1' = {
+  name: 'plinkdns'
+  params: {
+    location: location
+    virtualNetworkResourceIdsToLinkTo: [
+      vnet.outputs.resourceId
+    ]
+  }
+}
+
+module privateLinkScope 'br/public:avm/res/insights/private-link-scope:0.6.0' = {
+  name: 'plinkscope'
+  params: {
+    name: n.nameInsightsPrivateLinkScope(location, spaceName, 1)
+    privateEndpoints: [
+      {
+        // private link subnet
+        subnetResourceId: vnet.outputs.subnetResourceIds[0]
+      }
+    ]
+  }
+}
+
 output logAnalyticsWorkspaceId string = log.outputs.logAnalyticsWorkspaceId
 output networkId string = vnet.outputs.resourceId
