@@ -45,7 +45,9 @@ jobs:
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
 
-      - uses: azure/bicep-deploy@v2
+      - name: Deploy
+        if: inputs.operation == 'deploy'
+        uses: azure/bicep-deploy@v2
         with:
           type: deploymentStack
           operation: create
