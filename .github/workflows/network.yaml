@@ -2,6 +2,24 @@ name: Deploy Network Space
 
 on:
   workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        required: true
+        default: validate
+        description: Operation to execute
+        options:
+          - validate
+          - deploy
+      space:
+        type: choice
+        required: true
+        default: dev
+        description: Space name to deploy into
+        options:
+          - dev
+          - stg
+          - prod
 
 jobs:
   validate:
@@ -19,7 +37,7 @@ jobs:
 
       - uses: azure/bicep-deploy@v2
         with:
-          type: deployment
+          type: deploymentStack
           operation: validate
           name: Network-${{ github.run_number }}
           scope: resourceGroup
@@ -29,10 +47,13 @@ jobs:
 
       - uses: azure/bicep-deploy@v2
         with:
-          type: deployment
-          operation: whatIf
+          type: deploymentStack
+          operation: create
           name: Network-${{ github.run_number }}
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
+          action-on-unmanage-resources: delete
+          description: Network Deployment ${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
