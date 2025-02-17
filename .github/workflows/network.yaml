@@ -45,6 +45,7 @@ jobs:
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
           action-on-unmanage-resources: delete
+          deny-settings-mode: none
           description: Network Deployment ${{ inputs.space }}
           parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
 
@@ -60,5 +61,6 @@ jobs:
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
           action-on-unmanage-resources: delete
+          deny-settings-mode: none
           description: Network Deployment ${{ inputs.space }}
           parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
