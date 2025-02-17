@@ -22,7 +22,7 @@ on:
           - prod
 
 jobs:
-  validate:
+  deploy:
     runs-on: ubuntu-latest
 
     env:
@@ -44,6 +44,9 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
           template-file: ./04-simple-azure-platform/network/main.bicep
+          action-on-unmanage-resources: delete
+          description: Network Deployment ${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
 
       - name: Deploy
         if: inputs.operation == 'deploy'
