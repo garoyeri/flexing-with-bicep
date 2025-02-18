@@ -21,6 +21,8 @@ param logAnalyticsWorkspaceId string
 
 param databases DatabaseSpecification[] = []
 
+var Gb = 1024 * 1024 * 1024
+
 module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
   name: 'sqlep'
   params: {
@@ -43,6 +45,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           tier: 'Standard'
           capacity: 200
         }
+        maxSizeBytes: 10 * Gb
       }
     ]
     databases: map(databases, d => {
