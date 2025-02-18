@@ -26,6 +26,9 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
   params: {
     name: n.nameSqlServer(location, spaceName, workload, index)
     location: location
+    // normally you would NOT do this, instead designate an Entra ID group
+    administratorLogin: 'nimda'
+    administratorLoginPassword: 'dont-do-this'
     privateEndpoints: [
       {
         subnetResourceId: vnetSubnetId
