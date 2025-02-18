@@ -46,8 +46,9 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           capacity: 200
         }
         maxSizeBytes: 200 * Gb
+        // https://learn.microsoft.com/en-us/azure/azure-sql/database/resource-limits-dtu-elastic-pools?view=azuresql-db#standard-elastic-pool-limits
         perDatabaseSettings: {
-          maxCapacity: '150'
+          maxCapacity: '100'
           minCapacity: '10'
         }
       }
