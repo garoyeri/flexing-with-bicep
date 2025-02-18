@@ -35,7 +35,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: azure/bicep-deploy@v2
+      - name: Validate
+        uses: azure/bicep-deploy@v2
         with:
           type: deploymentStack
           operation: validate
