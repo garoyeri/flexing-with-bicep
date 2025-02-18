@@ -46,6 +46,10 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           capacity: 200
         }
         maxSizeBytes: 200 * Gb
+        perDatabaseSettings: {
+          maxCapacity: '150'
+          minCapacity: '10'
+        }
       }
     ]
     databases: map(databases, d => {
