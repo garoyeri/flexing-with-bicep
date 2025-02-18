@@ -112,5 +112,14 @@ module privateLinkScope 'br/public:avm/res/insights/private-link-scope:0.6.0' = 
   }
 }
 
+module privateLinkScope_scopedResource './scoped-resource/main.bicep' = {
+  name: 'PrivateLinkScope-ScopedResource-LOG'
+  params: {
+    name: log.outputs.name
+    privateLinkScopeName: privateLinkScope.outputs.name
+    linkedResourceId: log.outputs.resourceId
+  }
+}
+
 output logAnalyticsWorkspaceId string = log.outputs.resourceId
 output networkId string = vnet.outputs.resourceId
