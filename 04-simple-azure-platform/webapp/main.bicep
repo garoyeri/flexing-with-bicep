@@ -24,7 +24,7 @@ var subnets = toObject(
     role: s
     name: n.nameNetworkSubnet(location, s, 1)
     id: resourceId(
-      'Microsoft.Network/virtualNetworks/subnets@2024-01-01',
+      'Microsoft.Network/virtualNetworks/subnets',
       networkName,
       n.nameNetworkSubnet(location, s, 1)
     )
