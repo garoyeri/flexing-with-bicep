@@ -83,7 +83,7 @@ module vnet 'br/public:avm/res/network/virtual-network:0.5.2' = {
     ]
     diagnosticSettings: [
       {
-        workspaceResourceId: log.outputs.logAnalyticsWorkspaceId
+        workspaceResourceId: log.outputs.resourceId
       }
     ]
   }
@@ -112,5 +112,5 @@ module privateLinkScope 'br/public:avm/res/insights/private-link-scope:0.6.0' = 
   }
 }
 
-output logAnalyticsWorkspaceId string = log.outputs.logAnalyticsWorkspaceId
+output logAnalyticsWorkspaceId string = log.outputs.resourceId
 output networkId string = vnet.outputs.resourceId
