@@ -49,6 +49,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           workspaceResourceId: logAnalyticsWorkspaceId
         }
       ]
+      zoneRedundant: false
     })
   }
 }
