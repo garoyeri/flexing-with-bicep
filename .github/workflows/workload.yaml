@@ -51,7 +51,7 @@ jobs:
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
-          template-file: ./04-simple-azure-platform/workloads/main.bicep
+          template-file: ./04-simple-azure-platform/webapp/main.bicep
           action-on-unmanage-resources: delete
           deny-settings-mode: none
           description: Workload Deployment ${{ inputs.workload }}-${{ inputs.space }}
@@ -67,7 +67,7 @@ jobs:
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
-          template-file: ./04-simple-azure-platform/workloads/main.bicep
+          template-file: ./04-simple-azure-platform/webapp/main.bicep
           action-on-unmanage-resources: delete
           deny-settings-mode: none
           description: Workload Deployment ${{ inputs.workload }}-${{ inputs.space }}

@@ -1,4 +1,4 @@
-using '../../main.bicep'
+using '../webapp/main.bicep'
 
 param specification = {
   spaceName: 'dev'
