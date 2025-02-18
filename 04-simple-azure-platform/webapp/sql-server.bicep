@@ -45,7 +45,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           tier: 'Standard'
           capacity: 200
         }
-        maxSizeBytes: 10 * Gb
+        maxSizeBytes: 200 * Gb
       }
     ]
     databases: map(databases, d => {
