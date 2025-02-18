@@ -19,7 +19,7 @@ param serverFarmResourceId string
 param vnetSubnetId string
 
 module app 'br/public:avm/res/web/site:0.13.3' = {
-  name: 'app'
+  name: '${deployment().name}-1'
   params: {
     name: n.nameWebApplication(location, spaceName, workload, index)
     kind: 'app'

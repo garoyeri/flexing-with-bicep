@@ -1,0 +1,73 @@
+name: Deploy Workload
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        required: true
+        default: validate
+        description: Operation to execute
+        options:
+          - validate
+          - deploy
+      space:
+        type: choice
+        required: true
+        default: dev
+        description: Space name to deploy into
+        options:
+          - dev
+          - stg
+          - prod
+      workload:
+        type: choice
+        required: true
+        default: todolist
+        description: Workload to deploy
+        options:
+          - todolist
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      rg: ${{ vars.AZURE_RESOURCE_GROUP }}
+      location: ${{ vars.AZURE_LOCATION }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/bicep-deploy@v2
+        with:
+          type: deploymentStack
+          operation: validate
+          name: Workload-${{ inputs.workload }}-${{ inputs.space }}
+          scope: resourceGroup
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: ${{ env.rg }}
+          template-file: ./04-simple-azure-platform/workloads/main.bicep
+          action-on-unmanage-resources: delete
+          deny-settings-mode: none
+          description: Workload Deployment ${{ inputs.workload }}-${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/workloads/${{ inputs.workload }}/${{ inputs.space }}.bicepparam
+
+      - name: Deploy
+        if: inputs.operation == 'deploy'
+        uses: azure/bicep-deploy@v2
+        with:
+          type: deploymentStack
+          operation: create
+          name: Workload-${{ inputs.workload }}-${{ inputs.space }}
+          scope: resourceGroup
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: ${{ env.rg }}
+          template-file: ./04-simple-azure-platform/workloads/main.bicep
+          action-on-unmanage-resources: delete
+          deny-settings-mode: none
+          description: Workload Deployment ${{ inputs.workload }}-${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/workloads/${{ inputs.workload }}/${{ inputs.space }}.bicepparam

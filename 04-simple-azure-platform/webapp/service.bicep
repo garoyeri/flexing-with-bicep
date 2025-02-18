@@ -2,6 +2,7 @@ targetScope = 'resourceGroup'
 
 import * as n from '../names.bicep'
 
+@export()
 type AppServicePlanSize = 'XS' | 'S' | 'M' | 'L'
 
 @description('Location for all resources.')
@@ -26,7 +27,7 @@ var skuMap = {
 }
 
 module asp 'br/public:avm/res/web/serverfarm:0.4.1' = {
-  name: 'asp'
+  name: '${deployment().name}-1'
   params: {
     name: n.nameWebServerFarm(location, spaceName, workload, index)
     diagnosticSettings: [
