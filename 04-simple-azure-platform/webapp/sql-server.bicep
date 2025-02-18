@@ -37,34 +37,13 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
         subnetResourceId: vnetSubnetId
       }
     ]
-    elasticPools: [
-      {
-        name: n.nameSqlElasticPool(location, spaceName, workload, 1)
-        sku: {
-          name: 'StandardPool'
-          tier: 'Standard'
-          capacity: 200
-        }
-        maxSizeBytes: 200 * Gb
-        // https://learn.microsoft.com/en-us/azure/azure-sql/database/resource-limits-dtu-elastic-pools?view=azuresql-db#standard-elastic-pool-limits
-        perDatabaseSettings: {
-          maxCapacity: '100'
-          minCapacity: '10'
-        }
-        zoneRedundant: false
-      }
-    ]
     databases: map(databases, d => {
       name: d.name
       sku: {
-        name: 'StandardPool'
-        capacity: 100
+        name: 'S1'
+        capacity: 20
       }
-      elasticPoolResourceId: resourceId(
-        'Microsoft.Sql/servers/elasticPools',
-        n.nameSqlServer(location, spaceName, workload, index),
-        n.nameSqlElasticPool(location, spaceName, workload, 1)
-      )
+      maxSizeBytes: 100 * Gb
       diagnosticSettings: [
         {
           workspaceResourceId: logAnalyticsWorkspaceId
