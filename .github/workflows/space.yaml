@@ -1,4 +1,4 @@
-name: Deploy Network Space
+name: Deploy Space
 
 on:
   workflow_dispatch:
@@ -39,15 +39,15 @@ jobs:
         with:
           type: deploymentStack
           operation: validate
-          name: Network-${{ inputs.space }}
+          name: Space-${{ inputs.space }}
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
-          template-file: ./04-simple-azure-platform/network/main.bicep
+          template-file: ./04-simple-azure-platform/spaces/main.bicep
           action-on-unmanage-resources: delete
           deny-settings-mode: none
-          description: Network Deployment ${{ inputs.space }}
-          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
+          description: Space Deployment ${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/main.bicepparam
 
       - name: Deploy
         if: inputs.operation == 'deploy'
@@ -55,12 +55,12 @@ jobs:
         with:
           type: deploymentStack
           operation: create
-          name: Network-${{ inputs.space }}
+          name: Space-${{ inputs.space }}
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ env.rg }}
-          template-file: ./04-simple-azure-platform/network/main.bicep
+          template-file: ./04-simple-azure-platform/spaces/main.bicep
           action-on-unmanage-resources: delete
           deny-settings-mode: none
-          description: Network Deployment ${{ inputs.space }}
-          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/network.bicepparam
+          description: Space Deployment ${{ inputs.space }}
+          parameters-file: ./04-simple-azure-platform/spaces/${{ inputs.space }}/main.bicepparam
