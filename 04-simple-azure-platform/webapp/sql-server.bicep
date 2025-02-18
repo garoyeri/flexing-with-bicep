@@ -51,6 +51,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
           maxCapacity: '100'
           minCapacity: '10'
         }
+        zoneRedundant: false
       }
     ]
     databases: map(databases, d => {
