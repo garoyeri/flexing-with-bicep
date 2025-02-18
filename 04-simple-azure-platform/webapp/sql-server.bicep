@@ -57,7 +57,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
     databases: map(databases, d => {
       name: d.name
       sku: {
-        name: 'S2'
+        name: 'StandardPool'
         capacity: 100
       }
       elasticPoolResourceId: resourceId(
