@@ -29,7 +29,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
     // normally you would NOT do this, instead designate an Entra ID group
     administratorLogin: 'nimda'
     // if you are using non Entra ID admins, then use Key Vault to do this instead (TODO)
-    administratorLoginPassword: 'r@nd0m'
+    administratorLoginPassword: '8JjJnFwxfJYpQ^8uSBQ7'
     privateEndpoints: [
       {
         subnetResourceId: vnetSubnetId
