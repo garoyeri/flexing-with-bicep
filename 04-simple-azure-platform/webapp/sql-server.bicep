@@ -61,7 +61,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
         capacity: 100
       }
       elasticPoolResourceId: resourceId(
-        'Microsoft.Sql/servers/elasticPools@2023-08-01-preview',
+        'Microsoft.Sql/servers/elasticPools',
         n.nameSqlServer(location, spaceName, workload, index),
         n.nameSqlElasticPool(location, spaceName, workload, 1)
       )
