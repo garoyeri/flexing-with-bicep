@@ -35,14 +35,17 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
       {
         name: n.nameSqlElasticPool(location, spaceName, workload, 1)
         sku: {
-          name: 'GP_Gen5'
-          tier: 'GeneralPurpose'
-          capacity: 4
+          name: 'StandardPool'
+          tier: 'Standard'
+          capacity: 200
         }
       }
     ]
     databases: map(databases, d => {
       name: d.name
+      sku: {
+        name: 'S2'
+      }
       elasticPoolResourceId: resourceId(
         'Microsoft.Sql/servers/elasticPools@2023-08-01-preview',
         n.nameSqlServer(location, spaceName, workload, index),
