@@ -52,6 +52,7 @@ module sqlep 'br/public:avm/res/sql/server:0.12.3' = {
       name: d.name
       sku: {
         name: 'S2'
+        capacity: 100
       }
       elasticPoolResourceId: resourceId(
         'Microsoft.Sql/servers/elasticPools@2023-08-01-preview',
