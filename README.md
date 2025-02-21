@@ -1,5 +1,9 @@
 # Flexing with Bicep
 
+## Presentation Slides
+
+The presentation is a PDF here: [Slides](./Flexing%20with%20Bicep%20-%20Azure%20Infrastructure%20as%20Code.pdf)
+
 ## Running this in Azure
 
 First gather up the important details:
