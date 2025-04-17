@@ -4,6 +4,8 @@
 
 The presentation is a PDF here: [Slides](./Flexing%20with%20Bicep%20-%20Azure%20Infrastructure%20as%20Code.pdf)
 
+The Houston Azure User Group recording of this presentation is here: [Video](https://youtu.be/DAMIVpQLo60?si=WlmqH0aRRo2kMG0r)
+
 ## Running this in Azure
 
 First gather up the important details:
